@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load staticfiles i18n %}
+<html lang="{{ LANGUAGE_CODE }}" class="no-js">
+  <head>
+    <title>
+      {% block title %}
+        {% trans "Dashboard - Saleor" context "Dashboard default page title" %}
+      {% endblock %}
+    </title>
+    {% block meta %}
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    {% endblock meta %}
+
+    <!-- Global stylesheets -->
+    <link href="{% static 'css/roboto/roboto.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/icons/icomoon/styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/icons/fontawesome/styles.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/core.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/components.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/colors.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/extras/animate.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/extras/ladda-themeless.min.css' %}" rel="stylesheet" type="text/css">
+  <!-- /global stylesheets -->
+  <style type="text/css">
+    .search-panel{padding: 6px;}
+  </style>
+
+    {% block custom_css %}
+    <style type="text/css">
+      .error{ color: red; }
+      #refreshAttributes { cursor: pointer; }
+      body {
+      position: relative;
+    }
+    </style>
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'backend/css/fixed_table_header.css' %}">
+  </head>
+
+  <body class="{% block body_class %}{% endblock %} navbar-top">
+ <div class='content-area '>
+  <!-- Main navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top bg-primary-600" >
+    <div class="navbar-header" style="padding-right: : 30px;">
+      <a class="navbar-brand logo" href="{% url 'home' %}">
+          <span style="font-size: 1.5em;font-family: monospace;font-weight: bolder;">App</span>
+        <svg data-src="{% static "dashboard/images/saleor_logo.svg" %}" height="38px" width="176px" />
+      </a>
+    </div>
+
+      <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+          {% if request.user.name %}{{ request.user.name|title }} {% else %} {{ request.user.email }}{% endif %}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+             <li>
+                <a href="javascript:;">
+                 <i class="icon-user-plus"></i> My profile
+                </a>
+             </li>
+            <li role="separator" class="divider"></li>
+            <li>
+                <a href="{% url 'account_logout' %}" class="waves-effect waves-teal">
+                <i class="icon-switch"></i>
+                  {% trans "Log out" context "Dashboard top navigation action" %}
+                </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+  </div>
+  <!-- /main navbar -->
+  <!-- Page container -->
+  <div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+      <!-- Main content -->
+      <div class="content-wrapper">
+        <!-- Content area -->
+        <div class="content" id="content">
+
+                <h2 class="alert bg-slate">Hello {% if request.user.name %}{{ request.user.name|title }} {% else %} {{ request.user.email }}{% endif %}!</h2>
+
+
+        </div>
+        <!-- /content area -->
+
+    </div>
+    <!-- end page content -->
+  </div>
+  <!-- end page container -->
+
+
+
+    <div id="base-modal" class="modal"></div>
+    <div id="base-modal-fixed" class="modal modal-fixed-footer"></div>
+    <!-- Core JS files -->
+
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- /core JS files -->
+    <script type="text/javascript" src="{% static 'js/extras/jquery.validate.js' %} "></script>
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="{% static 'js/extras/jgrowl.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/extras/spin.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/extras/ladda.min.js' %}"></script> 
+    {% block custom_js %}{% endblock %}
+   </div>
+ </div>
+  </body>
+</html>
